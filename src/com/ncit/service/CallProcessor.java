@@ -25,7 +25,7 @@ public class CallProcessor {
     }
 
     public static void assignArrivingCallToOngoingList(ArrivingCall arrivingCall){
-        if(CallSystem.getLineInUse()==CallSystem.getLine()){
+        if(CallSystem.getLineInUse()==CallSystem.getLine()||isCallerBusy(arrivingCall)){
             incrementBlockedInCallCounter();
             incrementProcessedInCallCounter();
             return;
@@ -51,6 +51,19 @@ public class CallProcessor {
         CallCounter callCounter = CallSystem.getCallCounter();
         callCounter.setCompleted(callCounter.getCompleted()+1);
         CallSystem.setCallCounter(callCounter);
+    }
+
+    public static boolean isCallerBusy(ArrivingCall arrivingCall){
+        int arrTo = arrivingCall.getTo();
+        int arrFrom = arrivingCall.getFrom();
+        for(OngoingCall ongoingCall: CallSystem.getOngoingCallList()){
+            int onTo = ongoingCall.getTo();
+            int onFrom = ongoingCall.getFrom();
+            if(arrFrom==onFrom||arrFrom==onTo||arrTo==onTo||arrTo==onFrom){
+                return true;
+            }
+        }
+        return false;
     }
 
     public static void completeOngoingCalls(){
