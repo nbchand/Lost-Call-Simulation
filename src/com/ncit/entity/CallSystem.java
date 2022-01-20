@@ -52,7 +52,7 @@ public class CallSystem {
         CallSystem.arrivingCallList = arrivingCallList;
     }
 
-    public static List<OngoingCall> getOngoingCallList() {
+    public static List<OngoingCall> getOngoingCallList(){
         return ongoingCallList;
     }
 

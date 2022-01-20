@@ -3,8 +3,6 @@ package com.ncit.service;
 import com.ncit.entity.ArrivingCall;
 import com.ncit.entity.CallSystem;
 
-import java.util.List;
-
 public class ArrivingCallHandler {
     static int to=0, from=0, length=0, arrivingTime=0;
 

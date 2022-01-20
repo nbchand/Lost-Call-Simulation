@@ -30,8 +30,9 @@ public class CallProcessor {
             incrementProcessedInCallCounter();
             return;
         }
-            OngoingCallHandler.assignArrivingCallToOngoingList(arrivingCall);
-            CallSystem.setLineInUse(CallSystem.getLineInUse()+1);
+        OngoingCallHandler.assignArrivingCallToOngoingList(arrivingCall);
+        incrementProcessedInCallCounter();
+        CallSystem.setLineInUse(CallSystem.getLineInUse()+1);
     }
 
     public static void incrementProcessedInCallCounter(){
@@ -62,7 +63,6 @@ public class CallProcessor {
             if(ongoingCall.getEnd()==CallSystem.getClock()){
                 removeFromOngoingCallList.add(ongoingCall);
                 incrementCompletedInCallCounter();
-                incrementProcessedInCallCounter();
                 CallSystem.setLineInUse(CallSystem.getLineInUse()-1);
             }
         }
