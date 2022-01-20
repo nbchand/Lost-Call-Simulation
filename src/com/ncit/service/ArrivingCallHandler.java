@@ -35,8 +35,16 @@ public class ArrivingCallHandler {
         }
     }
 
-    public static void displayAllArrivingCalls(List<ArrivingCall> arrivingCallList){
-        for (ArrivingCall arrivingCall: arrivingCallList){
+    public static void updateArrivingCallList(){
+        ArrivingCall arrivingCall = createArrivingCall();
+        CallSystem.getArrivingCallList().add(arrivingCall);
+    }
+
+    public static void displayAllArrivingCalls(){
+        if(CallSystem.getArrivingCallList().isEmpty()){
+            System.out.println("No calls arriving right now");
+        }
+        for (ArrivingCall arrivingCall: CallSystem.getArrivingCallList()){
             System.out.println(arrivingCall);
         }
     }

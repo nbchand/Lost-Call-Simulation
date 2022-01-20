@@ -1,7 +1,7 @@
 package com.ncit.service;
 
-import com.ncit.entity.ArrivingCall;
 import com.ncit.entity.CallSystem;
+
 
 public class Simulator {
 
@@ -14,16 +14,26 @@ public class Simulator {
             clock++;
             CallSystem.setClock(clock);
             System.out.println("================================================================");
-            System.out.println("\t\tCurrent time: "+ CallSystem.getClock());
+
+            CallProcessor.completeOngoingCalls();
 
             CallProcessor.scheduleArrivingCalls();
 
             if(CallSystem.getClock()!=100){
-                ArrivingCall arrivingCall = ArrivingCallHandler.createArrivingCall();
-                CallSystem.getArrivingCallList().add(arrivingCall);
+                ArrivingCallHandler.updateArrivingCallList();
             }
-            ArrivingCallHandler.displayAllArrivingCalls(CallSystem.getArrivingCallList());
-            System.out.println("================================================================\n");
+
+            System.out.println("\nArriving calls at the time:");
+            ArrivingCallHandler.displayAllArrivingCalls();
+
+            System.out.println("\nOngoing calls at the time:");
+            OngoingCallHandler.displayAllOngoingCalls();
+
+            System.out.println("\n"+CallSystem.getCallCounter());
+
+            System.out.println("\nCurrent time: "+ CallSystem.getClock());
+
+            System.out.println("\n================================================================\n");
 
             //To make each iteration visible for one second
             try{
